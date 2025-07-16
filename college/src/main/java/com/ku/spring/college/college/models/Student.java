@@ -20,7 +20,7 @@ public class Student {
     @NotBlank(message = "DUI is mandatory")
     private String dui;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "students", cascade = CascadeType.ALL)
     private List<Course> courses;
 
     public Student() {

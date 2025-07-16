@@ -3,7 +3,6 @@ package com.ku.spring.college.college.service;
 import com.ku.spring.college.college.models.Course;
 import com.ku.spring.college.college.models.Student;
 import com.ku.spring.college.college.repository.StudentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +14,6 @@ public class StudentService {
 
     private StudentRepository studentRepository;
 
-    @Autowired
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
@@ -25,13 +23,13 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    @Transactional
+    //@Transactional
     public Student getStudentById(Long id) {
         return studentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
     }
 
-    @Transactional
+    //@Transactional
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
