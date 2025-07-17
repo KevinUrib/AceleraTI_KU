@@ -3,18 +3,15 @@ package com.ku.spring.college.college.service;
 import com.ku.spring.college.college.models.Course;
 import com.ku.spring.college.college.models.Teacher;
 import com.ku.spring.college.college.repository.TeacherRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.security.auth.callback.TextInputCallback;
 import java.util.List;
 
 @Service
 public class TeacherService {
     private TeacherRepository teacherRepository;
 
-    @Autowired
     public TeacherService(TeacherRepository teacherRepository) {
         this.teacherRepository = teacherRepository;
     }
