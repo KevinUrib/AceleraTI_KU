@@ -16,14 +16,10 @@ public class CourseService {
     private CourseRepository courseRepository;
     private StudentRepository studentRepository;
 
-    public CourseService(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
-    }
-
-    public CourseService(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
-
+    public CourseService(CourseRepository courseRepository, StudentRepository studentRepository) {
+    this.courseRepository = courseRepository;
+    this.studentRepository = studentRepository;
+}
 
     // METODOS CRUD PARA CURSO
     @Transactional

@@ -1,19 +1,30 @@
 package com.ku.spring.college.college.models;
 
-import jakarta.persistence.*;
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import java.util.List;
 
 @Entity
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank(message = "Course name is mandatory")
     private String courseName;
+
     @Min(value = 1, message = "Students quantity must be at least 1")
     private int studentsQuantity;
+
     @NotBlank(message = "Description is mandatory")
     private String description;
 
