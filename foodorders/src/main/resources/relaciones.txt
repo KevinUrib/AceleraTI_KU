@@ -1,0 +1,7 @@
+Archivo para documentar las relaciones existentes de entidades en dicho sistema
+
+Entidad Cliente -> Tiene muchos Pedidos 
+Entidad Producto -> Puede pertenecer a muchos Pedidos
+Entidad Pedido -> Tiene un Cliente, un Repartidor y muchos Productos a traves de PedidoDetalle
+Entidad Repartidor -> Puede tener muchos Pedidos
+PedidoDetalle -> Entidad intermedia para asociar Pedido + Producto + cantidad + precio
