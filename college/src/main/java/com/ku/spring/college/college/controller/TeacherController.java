@@ -2,6 +2,8 @@ package com.ku.spring.college.college.controller;
 
 import java.util.List;
 
+import com.ku.spring.college.college.dto.TeacherRequestDto;
+import com.ku.spring.college.college.dto.TeacherResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,26 +30,26 @@ public class TeacherController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Teacher>> getAllTeachers() {
-        List<Teacher> teachers = teacherService.getAllTeachers();
+    public ResponseEntity<List<TeacherResponseDto>> getAllTeachers() {
+        List<TeacherResponseDto> teachers = teacherService.getAllTeachers();
         return ResponseEntity.status(HttpStatus.OK).body(teachers);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Teacher> getTecherById(@PathVariable Long id) {
-        Teacher teacher = teacherService.getTeacherById(id);
+    public ResponseEntity<TeacherResponseDto> getTecherById(@PathVariable Long id) {
+        TeacherResponseDto teacher = teacherService.getTeacherById(id);
         return ResponseEntity.status(HttpStatus.OK).body(teacher);
     }
 
     @PostMapping
-    public ResponseEntity<Teacher> createTeacher(@RequestBody Teacher teacher) {
-        Teacher newTeacher = teacherService.createTeacher(teacher);
+    public ResponseEntity<TeacherResponseDto> createTeacher(@RequestBody TeacherRequestDto teacherDto) {
+        TeacherResponseDto newTeacher = teacherService.createTeacher(teacherDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(newTeacher);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Teacher> updateTeacher(@PathVariable Long id, @RequestBody Teacher teacherDetails) {
-        Teacher updatedTeacher = teacherService.updateTeacher(id, teacherDetails);
+    public ResponseEntity<TeacherResponseDto> updateTeacher(@PathVariable Long id, @RequestBody TeacherRequestDto teacherDetails) {
+        TeacherResponseDto updatedTeacher = teacherService.updateTeacher(id, teacherDetails);
         return ResponseEntity.status(HttpStatus.OK).body(updatedTeacher);
     }
 
