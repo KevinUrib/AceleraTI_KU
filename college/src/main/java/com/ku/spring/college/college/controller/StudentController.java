@@ -2,6 +2,8 @@ package com.ku.spring.college.college.controller;
 
 import java.util.List;
 
+import com.ku.spring.college.college.dto.StudentRequestDto;
+import com.ku.spring.college.college.dto.StudentResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,21 +30,21 @@ public class StudentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Student>> getAllStudents(){
-        List<Student> students = studentService.getAllStudents();
+    public ResponseEntity<List<StudentResponseDto>> getAllStudents(){
+        List<StudentResponseDto> students = studentService.getAllStudents();
         return ResponseEntity.status(HttpStatus.OK).body(students);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable Long id){
-        Student student = studentService.getStudentById(id);
+    public ResponseEntity<StudentResponseDto> getStudentById(@PathVariable Long id){
+        StudentResponseDto student = studentService.getStudentById(id);
         return ResponseEntity.status(HttpStatus.OK).body(student);
     }
 
     @PostMapping
-    public ResponseEntity<Student> createStudent(@RequestBody Student student){
-        Student creaStudent = studentService.createStudent(student);
-        return ResponseEntity.status(HttpStatus.CREATED).body(creaStudent);
+    public ResponseEntity<StudentResponseDto> createStudent(@RequestBody StudentRequestDto studentRequestDto){
+        StudentResponseDto student = studentService.createStudent(studentRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(student);
     }
 
     // Uso PUT porque modifico la relacion de cursos de un estudiante existente
@@ -54,8 +56,8 @@ public class StudentController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student studentDetails){
-        Student updateStudent = studentService.updateStudent(id, studentDetails);
+    public ResponseEntity<StudentResponseDto> updateStudent(@PathVariable Long id, @RequestBody StudentRequestDto studentDetails){
+        StudentResponseDto updateStudent = studentService.updateStudent(id, studentDetails);
         return ResponseEntity.status(HttpStatus.OK).body(updateStudent);
     }
 

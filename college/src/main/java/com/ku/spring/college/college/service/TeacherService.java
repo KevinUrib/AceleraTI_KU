@@ -1,8 +1,11 @@
 package com.ku.spring.college.college.service;
 
+import com.ku.spring.college.college.dto.TeacherRequestDto;
+import com.ku.spring.college.college.dto.TeacherResponseDto;
 import com.ku.spring.college.college.models.Course;
 import com.ku.spring.college.college.models.Teacher;
 import com.ku.spring.college.college.repository.TeacherRepository;
+import com.ku.spring.college.college.utils.TeacherMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,39 +13,47 @@ import java.util.List;
 
 @Service
 public class TeacherService {
-    private TeacherRepository teacherRepository;
+    private final TeacherRepository teacherRepository;
+    private TeacherMapper teacherMapper;
 
-    public TeacherService(TeacherRepository teacherRepository) {
+    public TeacherService(TeacherRepository teacherRepository, TeacherMapper teacherMapper) {
         this.teacherRepository = teacherRepository;
+        this.teacherMapper = teacherMapper;
     }
 
     @Transactional
-    public Teacher createTeacher(Teacher teacher) {
-        return teacherRepository.save(teacher);
+    public TeacherResponseDto createTeacher(TeacherRequestDto teacherRequestDto) {
+        Teacher teacher = teacherMapper.mapToTeacherRequest(teacherRequestDto);
+        Teacher savedTeacher = teacherRepository.save(teacher);
+        return teacherMapper.mapToTeacherResponse(savedTeacher);
     }
 
     @Transactional
-    public Teacher getTeacherById(Long id) {
-        return teacherRepository.findById(id)
+    public TeacherResponseDto getTeacherById(Long id) {
+        Teacher teacher = teacherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Teacher not found with id: " + id));
+    return teacherMapper.mapToTeacherResponse(teacher);
     }
 
     @Transactional
-    public List<Teacher> getAllTeachers(){
-        return teacherRepository.findAll();
+    public List<TeacherResponseDto> getAllTeachers(){
+        return teacherRepository.findAll()
+                .stream()
+                .map(teacherMapper::mapToTeacherResponse)
+                .toList();
     }
 
     @Transactional
-    public Teacher updateTeacher(Long id, Teacher teacherDetails){
-        return teacherRepository.findById(id)
-                .map(existingTeacher -> {
-                    existingTeacher.setTeacherName(teacherDetails.getTeacherName());
-                    existingTeacher.setAge(teacherDetails.getAge());
-                    existingTeacher.setEmail(teacherDetails.getEmail());
-                    existingTeacher.setSubject(teacherDetails.getSubject());
-                    return teacherRepository.save(existingTeacher);
-                })
+    public TeacherResponseDto updateTeacher(Long id, TeacherRequestDto teacherDetails){
+        Teacher existingTeacher = teacherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Teacher not found with id: " + id));
+
+        existingTeacher.setTeacherName(teacherDetails.getTeacherName());
+        existingTeacher.setAge(teacherDetails.getAge());
+        existingTeacher.setEmail(teacherDetails.getEmail());
+
+        Teacher updatedTeacher = teacherRepository.save(existingTeacher);
+        return teacherMapper.mapToTeacherResponse(updatedTeacher);
     }
 
     @Transactional

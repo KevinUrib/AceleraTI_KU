@@ -15,9 +15,11 @@ target/
 
 ### IntelliJ IDEA ###
 .idea
-*.iws
 *.iml
+out/
 *.ipr
+*.iws
+*.idea_modules/
 
 ### NetBeans ###
 /nbproject/private/
@@ -31,3 +33,14 @@ build/
 
 ### VS Code ###
 .vscode/
+*.code-workspace
+
+# Operating System (Windows)
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Operating System (macOS)
+.DS_Store
