@@ -3,9 +3,12 @@ package com.foodorders.foodorders.infrastructure.persistence;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import com.foodorders.foodorders.domain.model.Producto;
 import com.foodorders.foodorders.domain.repository.ProductoRepository;
 
+@Repository
 public class ProductoRepositoryImpl implements ProductoRepository{
 
     private final JpaProductoRepository jpaProductoRepository;

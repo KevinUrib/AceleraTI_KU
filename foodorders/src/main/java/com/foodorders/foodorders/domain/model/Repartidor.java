@@ -29,6 +29,8 @@ public class Repartidor {
     @NotBlank(message = "El nombre del repartidor no puede estar vacío")
     private String nombre;
 
+    private String telefono;
+
     @OneToMany(mappedBy = "repartidor")
     private List<Pedido> pedidos;
 }

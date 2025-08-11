@@ -33,6 +33,9 @@ public class Cliente {
     @Email(message = "El email debe ser válido")
     private String email;
 
+    private String direccion;
+    private String telefono;
+
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos;
 
